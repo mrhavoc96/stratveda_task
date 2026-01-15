@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const SECTIONS = [
-  { id: "what-we-do", label: "What We Do" },
+  { id: "what-we-do", label: "Home" },
   { id: "products", label: "Products" },
   { id: "why-us", label: "Why Us" },
   { id: "resources", label: "Resources" },
@@ -17,26 +17,62 @@ function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Navigation hide on
+  const [showNavbar, setShowNavbar] = useState(true);
+  const lastScrollY = useRef(0);
+  const heroInView = useRef(true);
+
+  // Allow navbar to be always visible in hero section
   useEffect(() => {
-  if (location.pathname !== "/") return;
+    if (location.pathname !== "/") return;
 
-  const productsSection = document.getElementById("products");
-  if (!productsSection) return;
+    const hero = document.getElementById("what-we-do"); // Hero section id
+    if (!hero) return;
 
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      // Hide navbar when Products is in view (desktop only)
-      setHideOnDesktop(entry.isIntersecting);
-    },
-    {
-      threshold: 0.3,
-    }
-  );
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        heroInView.current = entry.isIntersecting;
 
-  observer.observe(productsSection);
+        if (entry.isIntersecting) {
+          setShowNavbar(true); // ALWAYS show in Hero
+        }
+      },
+      { threshold: 0.3 }
+    );
 
-  return () => observer.disconnect();
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  // Hide navbar on scroll down and visible on scroll up
+  useEffect(() => {
+    if (location.pathname !== "/") return;
+
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+
+      // If hero is visible → always show
+      if (heroInView.current) {
+        setShowNavbar(true);
+        lastScrollY.current = currentY;
+        return;
+      }
+
+      // Scrolling down → hide
+      if (delta > 10) {
+        setShowNavbar(false);
+      }
+
+      // Scrolling up enough → show
+      if (delta < -40) {
+        setShowNavbar(true);
+      }
+
+      lastScrollY.current = currentY;
+    };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  return () => window.removeEventListener("scroll", handleScroll);
 }, [location.pathname]);
 
 
@@ -86,7 +122,7 @@ function Navbar() {
       fixed top-0 h-23 py-4 left-0 w-full z-50
       bg-[#000000]/40 backdrop-blur-md
       transition-transform duration-500
-      ${hideOnDesktop ? "lg:-translate-y-full" : "translate-y-0"}
+      ${showNavbar ? "translate-y-0" : "-translate-y-full"}
     `}>
 
         <div className="max-w-7xl mx-auto  h-16 flex items-center justify-between">
