@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const SECTIONS = [
   { id: "what-we-do", label: "Home" },
-  { id: "products", label: "Products" },
   { id: "why-us", label: "Why Us" },
+  { id: "products", label: "Products" },
   { id: "resources", label: "Resources" },
   { id: "about", label: "About" },
 ];

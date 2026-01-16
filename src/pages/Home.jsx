@@ -15,13 +15,13 @@ function Home() {
       <section id="problem-spaces">
         <ProblemSpace />
       </section>
+      
+      <section id="why-us">
+        <WhyUs />
+      </section>
 
       <section id="products">
         <Product />
-      </section>
-
-      <section id="why-us">
-        <WhyUs />
       </section>
 
       <section id="resources">
