@@ -55,7 +55,7 @@ function ConstraintField() {
       nodes.forEach((n) => {
         ctx.fillStyle = "#10b981";
         ctx.beginPath();
-        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 1);
+        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 9);
         ctx.fill();
       });
     };
