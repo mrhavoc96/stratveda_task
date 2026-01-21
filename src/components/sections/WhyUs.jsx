@@ -139,10 +139,10 @@ function WhyUs() {
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center p-12">
             <div>
-              <h2 className="font-display text-6xl lg:text-7xl text-white/85 mb-6">
-                Why Stratveda
+              <h2 className="font-display text-6xl lg:text-8xl text-white/85 mb-6">
+                Why Stratveda?
               </h2>
-              <p className="text-lg text-white/60 leading-relaxed max-w-xl">
+              <p className="text-lg lg:text-xl text-white/60 leading-relaxed max-w-xl">
                 Most organizations are surrounded by data, dashboards, and generic
                 AI tools, yet still struggle to make confident decisions.
                 <br /><br />
@@ -163,7 +163,7 @@ function WhyUs() {
 
             {/* ----- Text ----- */}
             <div className="max-w-4xl">
-              <h3 className="font-mono text-4xl lg:text-5xl font-semibold text-white mb-2">
+              <h3 className="font-mono text-4xl lg:text-5xl font-semibold text-white mb-4 sm:mb-2">
                 Tailored Intelligence
               </h3>
               <p className="text-lg text-white/65 leading-relaxed font-mono">
@@ -281,7 +281,7 @@ function WhyUs() {
 
             {/* ----- Section Heading ----- */}
             <div className="max-w-4xl">
-              <h3 className="font-mono text-4xl lg:text-5xl font-semibold text-white mb-2">
+              <h3 className="font-mono text-4xl lg:text-5xl font-semibold text-white mb-2 lg:mb-4">
                 Decision First Philosophy
               </h3>
               <p className="text-lg text-white/65 leading-relaxed font-mono">
@@ -297,25 +297,27 @@ function WhyUs() {
                 <div
                   key={index}
                   className="
+                    group
                     relative
                     rounded-2xl
                     bg-white/5
                     border border-white/10
                     p-6
-                    transition-all duration-300
+                    transition-all duration-600
                     hover:border-white/30
                     hover:bg-white/10
+                    hover:shadow-amber-100 shadow-2xs
                   "
                 >
-                  <div className="flex justify-center mb-6 text-white/60">
+                  <div className="flex justify-center mb-6 text-white/60 text-6xl group-hover:text-emerald-100 transition-all duration-700">
                     {card.icon}
                   </div>
 
-                  <h4 className="text-lg font-semibold text-white mb-3 text-center">
+                  <h4 className="text-xl font-semibold text-white mb-3 text-center group-hover:text-emerald-400">
                     {card.title}
                   </h4>
 
-                  <p className="text-sm text-white/55 text-center leading-relaxed">
+                  <p className="text-lg text-white/55 text-center leading-relaxed group-hover:text-white/70">
                     {card.description}
                   </p>
                 </div>
